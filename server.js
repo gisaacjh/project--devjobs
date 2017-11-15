@@ -6,6 +6,7 @@ const apiRouter = require('./src/routes/apiRouter.js');
 
 const app = express();
 const PATH = `${__dirname}/src/views/home.html`;
+const nonePath = `${__dirname}/src/views/404.html`
 
 app.use('/', pageRouter);
 app.use('/api/v1', apiRouter);
@@ -13,7 +14,11 @@ app.use('/api/v1', apiRouter);
 
 //Crar una ruta por si hay un error 404.
 app.use((req, res) => {
-  res.send('<header>404. Not Found</header>')
+  fs
+    .readFile(nonePath, 'utf-8')
+    .then(data => {
+      res.send(data);
+    })
 });
 
 // app.use('/', (req, res) => {
@@ -24,6 +29,7 @@ app.use((req, res) => {
 //
 //     })
 // });
+app.use(express.static(__dirname + '/public'));
 
 const PORT = process.env.PORT || 3000;
 
