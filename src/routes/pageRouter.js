@@ -7,13 +7,16 @@ const pageRouter = Router();
 //Crear las rutas
 pageRouter
   .get('/', (req, res) => {
-    res.send('<h1>HOME page</h1>')
+    res.render('home.ejs')
   });
 
 pageRouter
   .get('/about', (req, res) => {
-    res.send('<h1>ABOUT page</h1>')
+    res.render('about.ejs')
   });
+
+
+
 
 
   module.exports = pageRouter;
